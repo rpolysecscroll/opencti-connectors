@@ -1,0 +1,25 @@
+version: '3'
+services:
+  connector-etherscan:
+    build: .
+    container_name: connector-etherscan
+    environment:
+      # Connector's definition parameters:
+      - CONNECTOR_NAME=Etherscan
+      - CONNECTOR_SCOPE=Cryptocurrency-Wallet
+      # Connector's generic execution parameters:
+      - OPENCTI_URL=${OPENCTI_URL}
+      - OPENCTI_TOKEN=${OPENCTI_TOKEN} # create a hexagate connector user and grab token
+      - CONNECTOR_ID=${CONNECTOR_ID} # use a random uuid
+      - CONNECTOR_CONFIDENCE_LEVEL=70 # From 0 (Unknown) to 100 (Fully trusted).
+      - CONNECTOR_LOG_LEVEL=info
+      - CONNECTOR_RUN_EVERY=${CONNECTOR_RUN_EVERY}
+      - ETHERSCAN_API_KEY=${ETHERSCAN-API-KEY} # grab this from the Etherscan interface
+      - ETHERSCAN_AUTHOR_ID=${ETHERSCAN-AUTHOR-ID} # the identity--{uuid} that you want to attrib to creation of Note
+      - ALCHEMY_URL=${ALCHEMY-URL}
+    restart: always
+
+networks:
+  default:
+    external: true
+    name: docker_default
