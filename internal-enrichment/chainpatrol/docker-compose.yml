@@ -1,0 +1,24 @@
+version: '3'
+services:
+  connector-chainpatrol:
+    build: .
+    container_name: connector-chainpatrol
+    environment:
+      # Connector's definition parameters:
+      - CONNECTOR_NAME=Chainpatrol
+      - CONNECTOR_SCOPE=Domain-Name
+      # Connector's generic execution parameters:
+      - OPENCTI_URL=${OPENCTI_URL}
+      - OPENCTI_TOKEN=${OPENCTI_TOKEN} # create a hexagate connector user and grab token
+      - CONNECTOR_ID=${CONNECTOR_ID} # use a random uuid
+      - CONNECTOR_CONFIDENCE_LEVEL=70 # From 0 (Unknown) to 100 (Fully trusted).
+      - CONNECTOR_LOG_LEVEL=info
+      - CONNECTOR_RUN_EVERY=${CONNECTOR_RUN_EVERY}
+      - CHAINPATROL_API_KEY=${CHAINPATROL-API-KEY} # grab this from the Etherscan interface
+      - CHAINPATROL_AUTHOR_ID=${CHAINPATROL-AUTHOR-ID} # the identity--{uuid} that you want to attrib to creation of Note
+    restart: always
+
+networks:
+  default:
+    external: true
+    name: docker_default
