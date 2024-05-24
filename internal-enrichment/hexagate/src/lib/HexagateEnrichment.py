@@ -1,7 +1,7 @@
 import os
 from typing import Dict
 from pycti import OpenCTIConnectorHelper
-from stix2 import Note, TLP_WHITE, Identity
+from stix2 import Note, TLP_RED, TLP_WHITE, Identity
 import requests
 import json
 
@@ -99,7 +99,7 @@ class HexagateEnrichmentConnector:
             content=details,
             created_by_ref=self.author_id,
             object_refs=[self.entity_id],
-            object_marking_refs=TLP_WHITE,
+            object_marking_refs=TLP_RED,
         )
         stix_objects.append(note)
 
