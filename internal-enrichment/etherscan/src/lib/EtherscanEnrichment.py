@@ -7,6 +7,9 @@ import json
 from ens import ENS
 from web3 import Web3
 from etherscan import Etherscan
+import urllib3
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 class EtherscanEnrichmentConnector:
     """

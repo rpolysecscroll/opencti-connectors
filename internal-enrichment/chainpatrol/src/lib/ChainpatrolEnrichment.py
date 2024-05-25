@@ -4,6 +4,9 @@ from pycti import OpenCTIConnectorHelper
 from stix2 import Note, TLP_WHITE, Identity
 import requests
 import json
+import urllib3
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 class ChainpatrolEnrichmentConnector:
     """
@@ -72,7 +75,7 @@ class ChainpatrolEnrichmentConnector:
             details = 'Chainpatrol Report: {}'.format(response.json()['reportUrl'])
         else:
             abstract ='Result: {}'.format(response.json()['status'])
-            details = '({})'.format(response.json()['reason'])
+            details = abstract
 
         # start creating a list of stix objects
         stix_objects = []
